@@ -1,0 +1,30 @@
+﻿@model EmployeeDetail.ViewModel.HomeDetailsViewModel
+@{
+
+    var photoPath = "/images/" + Model.Employee.PhotoPath;
+    Layout="~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img class="card-img" src="@photoPath" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Employee.EmployeeName</h5>
+                                <p class="card-text">@Model.Employee.Email</p>
+                                <p>@Model.Employee.Email</p>
+                                <a asp-controller="home" asp-action="details" asp-route-id="@Model.Employee.Id" class="btn btn-success m-1">View</a>
+                                <a class="btn btn-primary m-1" asp-action="Edit" asp-controller="Home" asp-route-id="@Model.Employee.Id">Edit</a>
+                                <a class="btn btn-danger m-1">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

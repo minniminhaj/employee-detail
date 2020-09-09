@@ -1,0 +1,52 @@
+﻿@model EmployeeDetail.Models.EmployeeEditViewModel
+
+@{
+     var photoPath = "/images/" + @Model.ExistingPhotoPath;
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <input hidden asp-for="Id" />
+            <input hidden asp-for="ExistingPhotoPath" />
+            <form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post">
+                <div class="form-group">
+                    <label class="form-inline" asp-for="EmployeeName">Name</label>
+                    <input class="form-control" asp-for="EmployeeName" />
+                    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-inline" asp-for="Email">Email</label>
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-inline" asp-for="Department">Department</label>
+                    <select class="custom-select" asp-for="Department" asp-items="Html.GetEnumSelectList<EmployeeDetail.Models.Dept>()">
+                        <option>Please Select</option>
+                    </select>
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-inline col-sm-2" asp-for="ExistingPhotoPath">Upload</label>
+                    <div class="custom-file col-sm-10">
+                        <input class="form-control custom-file-input" asp-for="ExistingPhotoPath" />
+                        <label class="custom-file-label">Choose file.....</label>
+                    </div>
+                </div>
+                <img src="@photoPath" class="img-fluid" />
+                <button type="submit" class="btn btn-primary">Update</button>
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.custom-file-input').on('change', function () {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    });
+</script>
